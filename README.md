@@ -1,109 +1,69 @@
-# AgroChain Backend
-## Overview
-This repository contains the backend of the AgroChain project, built with PHP following an MVC structure. Currently, the backend provides a user registration API. It handles:
-- Receiving registration requests from a frontend or API client.
-- Validating submitted user data.
-- Hashing passwords securely using bcrypt.
-- Storing new users in a MySQL database.
-- Returning JSON responses indicating success, incomplete data, or duplicate email.
+# AgroChain
 
-## Folder Structure
-backend/
-├── config/
-│   └── db.php            # Database connection
-├── controller/
-│   └── UserController.php  # Handles user registration logic
-├── data/                 # Any seed data or example data
-├── helpers/              # Helper functions
-├── models/
-│   └── User.php          # User model
-├── routes/
-│   └── web.php           # Defines routes for the backend
-└── index.php             # Entry point for backend requests
+Backend system for AgroChain — an agricultural management platform.
 
-## Prerequisites
+Developed by **Adams Raphael Muzan**
 
-PHP >= 8.0
-MySQL (XAMPP or other local server)
-Postman (for testing APIs)
+## 📄 Project Description
+This project is designed to streamline agricultural operations. It allows multiple user roles (farmers, admins, and procurement officers) to manage production plans, track production stages, log harvest/delivery statuses, and handle procurement operations.
 
-## Setup Instructions
-1. Clone the repository
-```
-git clone <repository-url>
-cd agrochain
-```
+## 👥 User Roles
+- Admin – oversees the system, manages users, reviews production and procurement data.
+- Farmer – submits production plans, tracks stages of crop/animal production, logs harvest and delivery status.
+- Procurement Officer – manages procurement operations (to be added).
 
-2. Setup MySQL Database
+## ✅ Current Functionalities
+- Authentication & Authorization with role-based access.
+- Production Plan Submission by Farmers.
+- Production Stage Tracking (Farmers/Admin).
+- Harvest/Delivery Logging (Farmers).
+- Admin can view production data per farmer.
 
-Open phpMyAdmin (or any MySQL client).
-Create a database, e.g., `myfirstdatabase.`
-Create the `users` table:
-```sql
-CREATE TABLE users (
-    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    firstname VARCHAR(50) NOT NULL,
-    lastname VARCHAR(50) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    phone VARCHAR(20) NOT NULL,
-    pwd VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
+## 🔜 Planned Functionalities
+- Procurement operations for Procurement Officers.
+- Enhanced analytics and dashboards.
+- Notifications & reporting.
 
-Update database credentials in backend/config/db.php if needed.
+## 📁 Project Structure
+agrochain/
+│
+├── backend/
+│   ├── index.php                # Main entry point and router
+│   ├── controllers/             # Controllers (ProductionController.php, AuthController.php, etc.)
+│   ├── models/                  # Database logic
+│   ├── config/                  # Database connection (db.php)
+│
+└── README.md                    # This file
 
-3. Start Local Server
-- Start Apache and MySQL via XAMPP.
-- Place the backend folder under your web root (e.g., C:\xampp\htdocs\AgroChain\backend).
-- Access the backend via URL:
-  http://localhost/AgroChain/backend/index.php?route=register
-
-## API Endpoints
-User Registration
-
-URL: /backend/index.php?route=register
+## 🔗 API Endpoints (curent and proposed)
+### Auth (Login & Roles)
 Method: POST
-Content-Type: application/json or form-data
+Endpoint: /login
+Description: Authenticate user and return token
+		
+### Production (Farmers)
+1. Create Production
+Method:	POST
+Endpoint:	/create_production
+Description: Farmer submits production plan
+		
+2. Update Production stage/status   
+Method:	POST
+Endpoint:	/update_production_stage
+Description: Farmer logs production stage update
 
-### Request Body:
-```json
-{
-    "firstname": "John",
-    "lastname": "Doe",
-    "email": "john@example.com",
-    "phone": "08012345678",
-    "pwd": "securepassword"
-}
-```
+3. Log harvest delivery
+Method:	POST
+Endpoint:	/log_harvest_delivery
+Description: Farmer logs harvest/delivery status
 
-### Response Examples:
-Success:
-```json
-{
-    "message": "User registered successfully"
-}
+### Production (Admin)
+1. View a speciific production
+Method:	GET
+Endpoint:	/get_production/{id}
+Description: Admin fetches details of a production plan by ID
 
-
-Missing data:
-{
-    "message": "Incomplete data"
-}
-
-
-Duplicate email:
-{
-    "message": "Email already exists"
-}
-```
-
-## Notes
-- Passwords are hashed using bcrypt.
-- The backend currently handles registration only. Login and other endpoints will be added later.
-- The frontend interacts with the backend via HTTP requests (AJAX/fetch).
-
-## Future Improvements
-- Add login API.
-- Add JWT authentication.
-- Connect frontend forms to backend APIs.
-- Expand database models and relationships.
+2. View all productions	
+Method:	GET
+Endpoint:	/get_all_productions
+Description: Admin fetches all production plans		

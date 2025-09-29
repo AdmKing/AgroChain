@@ -43,27 +43,27 @@ Description: Authenticate user and return token
 		
 ### Production (Farmers)
 1. Create Production
-Method:	POST
-Endpoint:	/create_production
-Description: Farmer submits production plan
+- **Method**:	POST
+- **Endpoint**:	/create_production
+- **Description**: Farmer submits production plan
 		
 2. Update Production stage/status   
-Method:	POST
-Endpoint:	/update_production_stage
-Description: Farmer logs production stage update
+- **Method**:	POST
+- **Endpoint**:	/update_production_stage
+- **Description**: Farmer logs production stage update
 
 3. Log harvest delivery
-Method:	POST
-Endpoint:	/log_harvest_delivery
-Description: Farmer logs harvest/delivery status
+- **Method**:	POST
+- **Endpoint**: /log_harvest_delivery
+- **Description**: Farmer logs harvest/delivery status
 
 ### Production (Admin)
 1. View a speciific production
-Method:	GET
-Endpoint:	/get_production/{id}
-Description: Admin fetches details of a production plan by ID
+- **Method**:	GET
+- **Endpoint**:	/get_production/{id}
+- **Description**: Admin fetches details of a production plan by ID
 
 2. View all productions	
-Method:	GET
-Endpoint:	/get_all_productions
-Description: Admin fetches all production plans		
+- **Method**:	GET
+- **Endpoint**:	/get_all_productions
+- **Description**: Admin fetches all production plans		
